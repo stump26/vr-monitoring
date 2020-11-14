@@ -1,0 +1,7 @@
+{
+  "name": "@vr-monitoring/shared",
+  "main": "index.ts",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.8.0"
+  }
+}
