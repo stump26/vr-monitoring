@@ -10,8 +10,6 @@
     "build": "NODE_ENV=production PWD=`pwd` yarn workspace @vr-monitoring/shared-webpack run build --config $PWD/webpack.client.config.ts"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {

@@ -1,0 +1,8 @@
+{
+  "name": "@vr-monitoring/hooks",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "dependencies": {
+    "@apollo/react-hooks": "^4.0.0"
+  }
+}
