@@ -2,7 +2,7 @@ import path from 'path'
 import webpack from 'webpack'
 import { merge as wepackMerge } from 'webpack-merge'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin' // typescript 빌드 성능 향상.
-import { projectRoot } from '@apollo-manager/shared/config/paths'
+import { projectRoot } from '@vr-monitoring/shared/config/paths'
 import { getStyleLoaderConfig } from './base.style-loader.config'
 import { getSvgLoaderConfig } from './base.svg-loader.config'
 import { getGraphqlLoader } from './graphqlLoader.config'

@@ -1,8 +1,8 @@
 import { Entry, EntryFunc } from 'webpack'
 import { merge as webpackMerge } from 'webpack-merge'
 import { getWebpackBaseConfig } from './base.config'
-import { NODE_ENV } from '@apollo-manager/shared/config/mode'
-import { FileNames, Paths } from '@apollo-manager/shared/config/paths'
+import { NODE_ENV } from '@vr-monitoring/shared/config/mode'
+import { FileNames, Paths } from '@vr-monitoring/shared/config/paths'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const baseConfig = getWebpackBaseConfig({ webpackEnv: NODE_ENV, isClient: true })

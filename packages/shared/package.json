@@ -1,7 +1,12 @@
 {
   "name": "@vr-monitoring/shared",
   "main": "index.ts",
+  "version": "1.0.0",
+  "license": "sanguk.park",
   "dependencies": {
     "@elastic/elasticsearch": "^7.8.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

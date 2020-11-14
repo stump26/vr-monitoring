@@ -2,7 +2,7 @@ import webpack, { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import path from 'path'
 
-import { Paths } from '@apollo-manager/shared/config/paths'
+import { Paths } from '@vr-monitoring/shared/config/paths'
 
 type ParamType = {
   webpackConfig: Configuration[]
