@@ -1,0 +1,84 @@
+version: "3.8"
+
+services:
+  elasticsearch:
+    build:
+      context: ELK/elasticsearch/
+      args:
+        ELK_VERSION: ${ELK_VERSION:-7.8.0}
+    volumes:
+      - type: bind
+        source: ./ELK/elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data
+    ports:
+      - ${ES_PORT_1}:9200
+      - ${ES_PORT_2}:9300
+    environment:
+      ES_JAVA_OPTS: "-Xmx2g -Xms2g"
+      # ELASTIC_PASSWORD: password
+      discovery.type: single-node
+    networks:
+      - elk
+
+  logstash:
+    build:
+      context: ELK/logstash/
+      args:
+        ELK_VERSION: ${ELK_VERSION:-7.8.0}
+    volumes:
+      - type: bind
+        source: ./ELK/logstash/config/template/
+        target: /usr/share/logstash/config/template/
+        read_only: true
+      - type: bind
+        source: ./ELK/logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./ELK/logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+      - type: bind
+        source: ./ELK/logstash/filter/splitData.rb
+        target: /usr/share/logstash/filter/splitData.rb
+        read_only: true
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx2g -Xms2g"
+      ES_HOST: ${ES_HOST}:${ES_PORT_1}
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    build:
+      context: ELK/kibana/
+      args:
+        ELK_VERSION: ${ELK_VERSION:-7.8.0}
+    volumes:
+      - type: bind
+        source: ./ELK/kibana/config/kibana.yml
+        target: /usr/share/kibana/config/kibana.yml
+        read_only: true
+    ports:
+      - "5601:5601"
+    environment:
+      ES_HOST: ${ES_HOST}:${ES_PORT_1}
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+networks:
+  elk:
+    driver: bridge
+
+volumes:
+  elasticsearch:
