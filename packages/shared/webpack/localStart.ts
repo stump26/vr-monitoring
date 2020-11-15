@@ -7,10 +7,11 @@ import { Paths } from '@vr-monitoring/shared/config/paths'
 type ParamType = {
   webpackConfig: Configuration[]
   paths: Paths
-  localhostName: string
+  port: number
+  localhostName: string[]
 }
 
-export function localStart({ webpackConfig, paths, localhostName }: ParamType) {
+export function localStart({ webpackConfig, paths, port, localhostName }: ParamType) {
   function replaceFilename(filenameConfig: Configuration['output']['filename']): Configuration['output']['filename'] {
     if (typeof filenameConfig === 'string') {
       return filenameConfig.replace('[hash]', '')
@@ -37,17 +38,18 @@ export function localStart({ webpackConfig, paths, localhostName }: ParamType) {
         colors: true,
       },
       liveReload: true,
-      sockHost: localhostName,
-      sockPort: 3000,
+      sockHost: localhostName[0],
+      sockPort: port,
       contentBase: path.resolve(paths.root, 'build/'),
-      allowedHosts: [localhostName],
+      allowedHosts: [...localhostName],
       historyApiFallback: true,
     }
 
     const devServer = new WebpackDevServer(compiler, devServerOption)
 
-    devServer.listen(3000, '127.0.0.1', () => {
-      console.log('Devserver Starting server on http://localhost:3000')
+    devServer.listen(3000, () => {
+      console.log(`Devserver Starting server on http://${localhostName[0]}:${port}`)
+      console.log('allowed Hosts > ', localhostName)
     })
   }
 

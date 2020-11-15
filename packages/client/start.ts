@@ -5,5 +5,6 @@ import webpackConfig from './webpack.client.config'
 localStart({
   webpackConfig,
   paths,
-  localhostName: 'localhost',
+  port: 3000,
+  localhostName: ['localhost', '192.168.0.3'],
 })

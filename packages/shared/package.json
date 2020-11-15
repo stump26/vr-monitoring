@@ -2,7 +2,7 @@
   "name": "@vr-monitoring/shared",
   "main": "index.ts",
   "version": "1.0.0",
-  "license": "sanguk.park",
+  "license": "MIT",
   "dependencies": {
     "@elastic/elasticsearch": "^7.8.0"
   },
