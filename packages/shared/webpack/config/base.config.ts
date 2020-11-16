@@ -5,6 +5,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin' // types
 import { projectRoot } from '@vr-monitoring/shared/config/paths'
 import { getStyleLoaderConfig } from './base.style-loader.config'
 import { getSvgLoaderConfig } from './base.svg-loader.config'
+import { getImageFileLoaderConfig } from './base.imagefile-loader.config'
 import { getGraphqlLoader } from './graphqlLoader.config'
 
 export const getWebpackBaseConfig = ({ webpackEnv, isClient }: { webpackEnv: 'development' | 'production'; isClient: boolean }) => {
@@ -39,5 +40,5 @@ export const getWebpackBaseConfig = ({ webpackEnv, isClient }: { webpackEnv: 'de
       }),
     ],
   }
-  return wepackMerge(config, getStyleLoaderConfig(), getSvgLoaderConfig(), getGraphqlLoader())
+  return wepackMerge(config, getStyleLoaderConfig(), getSvgLoaderConfig(), getGraphqlLoader(), getImageFileLoaderConfig())
 }
