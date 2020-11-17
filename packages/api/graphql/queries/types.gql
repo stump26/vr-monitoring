@@ -4,6 +4,7 @@ scalar JSON
 type Query {
   # operation
   getTestString: String
+  getWebsiteCapture(url: String!): String
 }
 
 type Mutation {
