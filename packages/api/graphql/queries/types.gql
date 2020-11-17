@@ -1,0 +1,11 @@
+scalar Date
+scalar JSON
+
+type Query {
+  # operation
+  getTestString: String
+}
+
+type Mutation {
+  _empty: String
+}

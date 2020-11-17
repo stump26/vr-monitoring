@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "author": "sanguk.park <moidpg@gmail.com>",
   "scripts": {
+    "start:api": "yarn workspace @vr-monitoring/api start",
     "start:web": "yarn workspace @vr-monitoring/client start",
     "build:web": "yarn workspace @vr-monitoring/client build"
   },
