@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import PlaneBoard from '../PlaneBoard' 
 
 const Container = styled(PlaneBoard)`
@@ -19,7 +18,6 @@ const Title = styled.div`
 `
 
 const HomeBoard = ()=>{
-  
   return (
     <Container id="main" className="screen main dark" position="0 2 -2.3" >
       <Title>vr-monitor</Title>

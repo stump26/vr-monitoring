@@ -32,7 +32,6 @@ const PlaneBoard:React.FC<Props> =({children,id="",className="",position="",rota
       }}
       _ref={entityRef}
       >
-        
       {children}
     </Entity>
   )
