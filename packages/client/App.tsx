@@ -25,7 +25,7 @@ const App: React.FC = () => {
         position="5 5.5 -2.3"
       />
       {/* camera config */}
-      <Entity primitive="a-camera" wasd-controls="acceleration:500" position="0 2 0">
+      <Entity primitive="a-camera" wasd-controls="acceleration:500;fly:true;" position="0 2 0" >
         {/* <Entity primitive="a-cursor" id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .screen"/> */}
         <Entity laser-controls raycaster="objects: .screen;" />
       </Entity>
