@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
+    "@apollo/client": "^3.2.7",
     "@elastic/elasticsearch": "^7.8.0"
   },
   "devDependencies": {
