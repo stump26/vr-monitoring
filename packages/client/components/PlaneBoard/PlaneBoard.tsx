@@ -6,10 +6,9 @@ type Props ={
   className?:string
   position?:object
   rotation?:string
-  background?:string
 }
 
-const PlaneBoard:React.FC<Props> =({id="",className="",position={x:0,y:0,z:0},rotation="",background})=>{
+const PlaneBoard:React.FC<Props> =({id="",className="",position={x:0,y:0,z:0},rotation=""})=>{
   return (
     <>
       <Entity 
@@ -20,7 +19,6 @@ const PlaneBoard:React.FC<Props> =({id="",className="",position={x:0,y:0,z:0},ro
         material="transparent: true; opacity: 0.4; shader: standard"
         id={id}
         color="#535353"
-        src={background}
         events={{
           click:()=>{console.log(`${id} clicked`)},
           // componentchanged:(e)=>{console.log(`${id} componentchanged`,e)},

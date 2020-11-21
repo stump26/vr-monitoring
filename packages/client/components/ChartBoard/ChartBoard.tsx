@@ -8,12 +8,11 @@ import Text from '../Text'
 type Props = {
   url:string
   position?:coord
-  rotaion?:string
+  rotation?:string
 }
 interface getChartImagesResponse {
   getWebsiteCapture:string
 }
-
 
 const GET_CHART_IMAGES=gql`
   query getImage($url:String!){
@@ -21,14 +20,14 @@ const GET_CHART_IMAGES=gql`
   }
 `
 
-const ChartBoard:React.FC<Props> = ({url,position,rotaion})=>{
+const ChartBoard:React.FC<Props> = ({url,position,rotation})=>{
   const { loading, error, data } = useQuery<getChartImagesResponse>(GET_CHART_IMAGES,{variables:{url}})
 
   console.log(data)
   if(loading && !error){
     return (
       <>
-      <PlaneBoard position={position} rotation={rotaion} />
+      <PlaneBoard position={position} rotation={rotation} />
       <Text
         value={"loading"}
         color={"#fff"}
@@ -42,7 +41,17 @@ const ChartBoard:React.FC<Props> = ({url,position,rotaion})=>{
     
   }
   return (
-    <PlaneBoard position={position} rotation={rotaion} background={`data:image/jpg;base64, ${data.getWebsiteCapture}`} />
+    <>d
+      <PlaneBoard position={position} rotation={rotation} />
+      <Entity 
+        primitive="a-image" 
+        rotation={rotation}
+        position={{...position,z:position.z+0.03}}
+        src={`data:image/jpg;base64, ${data.getWebsiteCapture}`}
+        width={3.8}
+        height={2.8}
+      />
+    </>
   )
 }
 
