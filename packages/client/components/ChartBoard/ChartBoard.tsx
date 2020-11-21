@@ -3,24 +3,17 @@ import styled from 'styled-components'
 import {gql,useQuery} from '@apollo/react-hooks'
 import { Entity } from 'aframe-react';
 import PlaneBoard from '../PlaneBoard' 
+import Text from '../Text'
 
 type Props = {
   url:string
-  position?:string
+  position?:coord
   rotaion?:string
 }
 interface getChartImagesResponse {
   getWebsiteCapture:string
 }
 
-const Container = styled(PlaneBoard)`
-  position: relative;
-  width: 1024px;
-  height: 720px;
-  background-color: rgba(185, 185, 185, 0.3);
-  border-radius: 50px;
-  padding: 40px; 
-`
 
 const GET_CHART_IMAGES=gql`
   query getImage($url:String!){
@@ -32,14 +25,24 @@ const ChartBoard:React.FC<Props> = ({url,position,rotaion})=>{
   const { loading, error, data } = useQuery<getChartImagesResponse>(GET_CHART_IMAGES,{variables:{url}})
 
   console.log(data)
+  if(loading && !error){
+    return (
+      <>
+      <PlaneBoard position={position} rotation={rotaion} />
+      <Text
+        value={"loading"}
+        color={"#fff"}
+        align="center"
+        zOffset={0.02}
+        width={10}
+        position={position}
+      />
+      </>
+    )
+    
+  }
   return (
-    <Container position={position} rotation={rotaion} >
-      {
-        loading && !error
-          ?<div>loading</div>
-          :<img src={`data:image/jpg;base64, ${data.getWebsiteCapture}`} width="100%"/>
-      }
-    </Container>
+    <PlaneBoard position={position} rotation={rotaion} background={`data:image/jpg;base64, ${data.getWebsiteCapture}`} />
   )
 }
 

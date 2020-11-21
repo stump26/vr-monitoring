@@ -1,27 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import PlaneBoard from '../PlaneBoard' 
+import Button from '../Button'
 
-const Container = styled(PlaneBoard)`
-  position: relative;
-  width: 1024px;
-  height: 720px;
-  background-color: rgba(185, 185, 185, 0.3);
-  border-radius: 50px;
-  padding: 40px; 
-`
-const Title = styled.div`
-  position: relative;
-  font-size: 80px;
-  text-align: center;
-  margin-top: 80px;
-`
+interface IProps {
+  position:coord
+}
 
-const HomeBoard = ()=>{
+const HomeBoard:React.FC<IProps> = ({position})=>{
   return (
-    <Container id="main" className="screen main dark" position="0 2 -2.3" >
-      <Title>vr-monitor</Title>
-    </Container>
+    <>
+      <PlaneBoard id="main" className="screen main dark" position={position} />
+      <Button 
+        text="Button" 
+        width={1.7}
+        height={0.5}
+        textColor="#ffa600"
+        textWidth={10}
+        position={{...position,z:position.z+0.03}}
+      />
+    </>
   )
 }
 

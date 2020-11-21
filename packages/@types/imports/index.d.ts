@@ -6,3 +6,9 @@ declare module '*.svg' {
 }
 
 declare module '*.png'
+
+interface coord {
+  x: number
+  y: number
+  z: number
+}

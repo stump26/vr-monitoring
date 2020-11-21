@@ -1,39 +1,34 @@
-import React,{useRef,useEffect} from 'react'
-import { Entity } from 'aframe-react';
-import {Entity as IEntity} from 'aframe'
+import React from 'react'
+import { Entity } from 'aframe-react'
 
 type Props ={
   id?:string
   className?:string
-  position?:string
+  position?:object
   rotation?:string
+  background?:string
 }
 
-const PlaneBoard:React.FC<Props> =({children,id="",className="",position="",rotation=""})=>{
-  const entityRef = function(entityEl:IEntity){
-    entityEl.ontransitionend=(ev: TransitionEvent) => {
-      console.log(this,ev)
-    }
-    console.log(entityEl.object3D)
-  }
-
+const PlaneBoard:React.FC<Props> =({id="",className="",position={x:0,y:0,z:0},rotation="",background})=>{
   return (
-    <Entity primitive="a-entity" 
-      htmlembed="ppu:256" 
-      className={`screan ${className}`} 
-      position={position} 
-      rotation={rotation}
-      id={id}
-      color="#fff"
-      events={{
-        // click:()=>{console.log(`${id} clicked`)},
-        componentchanged:(e)=>{console.log(`${id} componentchanged`,e)},
-        schemachanged:(e)=>{console.log(`${id} schemachanged`,e)}
-      }}
-      _ref={entityRef}
-      >
-      {children}
-    </Entity>
+    <>
+      <Entity 
+        className={`screan ${className}`} 
+        position={position} 
+        rotation={rotation}
+        geometry="primitive: box; width: 4; height: 3; depth: 0.02;"
+        material="transparent: true; opacity: 0.4; shader: standard"
+        id={id}
+        color="#535353"
+        src={background}
+        events={{
+          click:()=>{console.log(`${id} clicked`)},
+          // componentchanged:(e)=>{console.log(`${id} componentchanged`,e)},
+          // schemachanged:(e)=>{console.log(`${id} schemachanged`,e)}
+        }}
+        >
+      </Entity>
+    </>
   )
 }
 
