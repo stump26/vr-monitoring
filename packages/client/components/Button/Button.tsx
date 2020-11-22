@@ -13,19 +13,18 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
   text?: string,
   textColor?: string,
   textWidth?: number,
-  value?: string,
+  value?: string
 }
 
 const Button:React.FC<Props>=({
-  id="", className="", position, width, height, buttonColor, text, textColor, textWidth,actionToTrigger, value
+  id="", className="", position, width, height, buttonColor, text, textColor, textWidth,actionToTrigger, value,onClick
 })=>{
   const [opacity,setOpacity] = useState(1)
 
   const startIntersection = useCallback(()=>{
     console.log("startInterscection")
     setOpacity(0.2)
-    actionToTrigger?.call(value)
-  },[actionToTrigger, value])
+  },[value])
   const endIntersection = useCallback(()=>{
     console.log("endInterscection")
     setOpacity(1)
@@ -44,7 +43,7 @@ const Button:React.FC<Props>=({
       scale={{ x: 0.5, y: 0.5, z: 0.5 }}
       position={position}
       events={{
-        click:()=>{console.log("click test1")},
+        click:actionToTrigger,
         'mouseenter': startIntersection,
         'mouseleave': endIntersection,
       }}
