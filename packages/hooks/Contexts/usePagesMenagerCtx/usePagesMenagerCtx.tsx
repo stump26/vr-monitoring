@@ -2,17 +2,8 @@ import React, { useState } from 'react'
 import { createCtx } from '../createCtx'
 
 export interface IPage {
-  component: React.Component
-  position: {
-    x:number
-    y:number
-    z:number
-  }
-  rotation: {
-    roll:number
-    yaw:number
-    pitch:number
-  }
+  Component: React.FunctionComponent
+  [key:string]:any
 }
 
 interface Context {

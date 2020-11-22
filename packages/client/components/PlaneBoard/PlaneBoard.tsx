@@ -20,7 +20,7 @@ const PlaneBoard:React.FC<Props> =({children,id="",className="",position={x:0,y:
         id={id}
         color="#535353"
         events={{
-          click:()=>{console.log(`${id} clicked`)},
+          // click:()=>{console.log(`${id} clicked`)},
           // componentchanged:(e)=>{console.log(`${id} componentchanged`,e)},
           // schemachanged:(e)=>{console.log(`${id} schemachanged`,e)}
         }}
