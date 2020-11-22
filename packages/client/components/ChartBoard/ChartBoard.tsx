@@ -9,6 +9,7 @@ type Props = {
   url:string
   position?:coord
   rotation?:string
+  id?:string
 }
 interface getChartImagesResponse {
   getWebsiteCapture:string
@@ -20,7 +21,7 @@ const GET_CHART_IMAGES=gql`
   }
 `
 
-const ChartBoard:React.FC<Props> = ({url,position,rotation})=>{
+const ChartBoard:React.FC<Props> = ({id,url,position,rotation})=>{
   const { loading, error, data } = useQuery<getChartImagesResponse>(GET_CHART_IMAGES,{variables:{url}})
 
   console.log(data)
@@ -42,7 +43,7 @@ const ChartBoard:React.FC<Props> = ({url,position,rotation})=>{
   }
   return (
     <>
-      <PlaneBoard position={position} rotation={rotation}>
+      <PlaneBoard position={position} rotation={rotation} id={id}>
         <Entity 
           primitive="a-image" 
           rotation={rotation}
