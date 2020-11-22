@@ -41,16 +41,18 @@ const ChartBoard:React.FC<Props> = ({url,position,rotation})=>{
     
   }
   return (
-    <>d
-      <PlaneBoard position={position} rotation={rotation} />
-      <Entity 
-        primitive="a-image" 
-        rotation={rotation}
-        position={{...position,z:position.z+0.03}}
-        src={`data:image/jpg;base64, ${data.getWebsiteCapture}`}
-        width={3.8}
-        height={2.8}
-      />
+    <>
+      <PlaneBoard position={position} rotation={rotation}>
+        <Entity 
+          primitive="a-image" 
+          rotation={rotation}
+          position={{z:0.03}}
+
+          src={`data:image/jpg;base64, ${data.getWebsiteCapture}`}
+          width={3.8}
+          height={2.8}
+        />
+      </PlaneBoard>
     </>
   )
 }

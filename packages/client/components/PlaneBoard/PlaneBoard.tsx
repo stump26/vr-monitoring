@@ -8,7 +8,7 @@ type Props ={
   rotation?:string
 }
 
-const PlaneBoard:React.FC<Props> =({id="",className="",position={x:0,y:0,z:0},rotation=""})=>{
+const PlaneBoard:React.FC<Props> =({children,id="",className="",position={x:0,y:0,z:0},rotation=""})=>{
   return (
     <>
       <Entity 
@@ -25,6 +25,7 @@ const PlaneBoard:React.FC<Props> =({id="",className="",position={x:0,y:0,z:0},ro
           // schemachanged:(e)=>{console.log(`${id} schemachanged`,e)}
         }}
         >
+          {children}
       </Entity>
     </>
   )
