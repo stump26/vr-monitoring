@@ -22,7 +22,7 @@ const HomeBoard:React.FC<IProps> = ({position})=>{
       <Button 
         text="Regist Chart" 
         width={3}
-        height={0.5}
+        height={0.8}
         textColor="#ffa600"
         textWidth={10}
         position={{...position,z:position.z+0.03}}

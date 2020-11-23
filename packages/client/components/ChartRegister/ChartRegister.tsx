@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useReducer, useCallback } from 'react'
 import styled from 'styled-components'
 import ChartBoard from '../ChartBoard'
 import {usePagesMenagerCtx} from '@vr-monitoring/hooks/Contexts/usePagesMenagerCtx'
+import {useModalCtx} from '@vr-monitoring/hooks/Contexts/useModalCtx'
 import {hashgen} from '@vr-monitoring/shared/util/hashgen'
 
 
@@ -27,31 +28,58 @@ const RegisterBtn = styled.div`
     border-color:#fff;
   }
 `
+
+function coordReducer(state,action){
+  switch(action.type){
+    case 'X':
+      return {...state,x:action.value}
+    case 'Y':
+      return {...state,y:action.value}
+    case 'Z':
+      return {...state,z:action.value}
+  }
+}
+
 // TODO register 폼 레이아웃 설정, position 설정
 const ChartRegister = ()=>{
-  const [url,setUrl] = useState<string>()
   const { addPage } = usePagesMenagerCtx()
+  const { modalOff }=useModalCtx()
+  const [rawUrl,setUrl] = useState<string>()
+  const [coord,dispatch] = useReducer(coordReducer,{x:0,y:0,z:0})
 
   const handleUrlChange = useCallback((e)=>{
     setUrl(e.target.value)
-  },[url])
+  },[rawUrl])
 
   const handleRegistBtn = useCallback((e)=>{
-    console.log(url)
+    let [aa] = rawUrl?.match(/src="(?:[^"\\]|\\.)*"/gi)
+    const url =aa.match(/"(.*?)"/g)[0].replace(/^[^"]*"|".*/g, '')
     addPage({
       id:hashgen(12),
       Component: ChartBoard,
-      position:{x:5,y:2,z:-2.3},
+      position:coord,
       url
     })
-  },[url])
+    modalOff()
+  },[rawUrl,coord])
+
+  const handleXpos = useCallback(e=>dispatch({type:'X',value:e.target.value}),[coord,dispatch])
+  const handleYpos = useCallback(e=>dispatch({type:'Y',value:e.target.value}),[coord,dispatch])
+  const handleZpos = useCallback(e=>dispatch({type:'Z',value:e.target.value}),[coord,dispatch])
 
   return(
     <>
       <div>Register</div>
       <RegisterContainer>
         <label>url, embeded</label> 
-        <textarea value={url} onChange={handleUrlChange}/>
+        <textarea value={rawUrl} onChange={handleUrlChange}/>
+        <label>pogition</label>
+        <label>x</label>
+        <input type="number" defaultValue={0} onChange={handleXpos}/>
+        <label>y</label>
+        <input type="number" defaultValue={0} onChange={handleYpos}/>
+        <label>z</label>
+        <input type="number" defaultValue={0} onChange={handleZpos}/>
         <RegisterBtn onClick={handleRegistBtn}>Add</RegisterBtn>
       </RegisterContainer>
     </>
