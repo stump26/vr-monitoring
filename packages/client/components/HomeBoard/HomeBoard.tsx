@@ -20,8 +20,8 @@ const HomeBoard:React.FC<IProps> = ({position})=>{
     <>
       <PlaneBoard id="main" className="screen main dark" position={position} />
       <Button 
-        text="Button" 
-        width={1.7}
+        text="Regist Chart" 
+        width={3}
         height={0.5}
         textColor="#ffa600"
         textWidth={10}

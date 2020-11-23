@@ -1,11 +1,11 @@
-import React,{useCallback, useEffect, useState} from 'react'
+import React,{ useEffect } from 'react'
 import {Entity} from 'aframe-react'
 
 import {CyberSpace} from './space'
 import HomeBoard from './components/HomeBoard'
-import ChartBoard from './components/ChartBoard'
 import Button from './components/Button'
 import Modal from './components/Modal'
+import ChartRegister from './components/ChartRegister'
 
 import {usePagesMenagerCtx} from '@vr-monitoring/hooks/Contexts/usePagesMenagerCtx'
 import {useModalCtx} from '@vr-monitoring/hooks/Contexts/useModalCtx'
@@ -16,16 +16,6 @@ import './App.scss'
 const App: React.FC = () => {
   const {addPage,pages} = usePagesMenagerCtx()
   const {modalVisible,modalOff} = useModalCtx()
-
-  useEffect(()=>{
-    addPage({
-      id:hashgen(12),
-      Component: ChartBoard,
-      position:{x:5,y:2,z:-2.3},
-      url:"http://localhost:5601/app/kibana#/visualize/edit/14e2e710-4258-11e8-b3aa-73fdaf54bfc9?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15d%2Cto%3Anow))"
-    })
-  },[])
-
 
   return (
     <>
@@ -52,10 +42,9 @@ const App: React.FC = () => {
       <Modal 
         visible={modalVisible}
         closeAction={modalOff}
-        Contents={
-          <div>hello</div>
-        }
-      />
+      >
+        <ChartRegister />
+      </Modal>
     </>
     
   )
