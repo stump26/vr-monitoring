@@ -27,7 +27,7 @@ const RegisterBtn = styled.div`
     border-color:#fff;
   }
 `
-
+// TODO register 폼 레이아웃 설정, position 설정
 const ChartRegister = ()=>{
   const [url,setUrl] = useState<string>()
   const { addPage } = usePagesMenagerCtx()
@@ -50,7 +50,7 @@ const ChartRegister = ()=>{
     <>
       <div>Register</div>
       <RegisterContainer>
-        <label>url, embeded</label>
+        <label>url, embeded</label> 
         <textarea value={url} onChange={handleUrlChange}/>
         <RegisterBtn onClick={handleRegistBtn}>Add</RegisterBtn>
       </RegisterContainer>
