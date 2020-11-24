@@ -43,6 +43,7 @@ export function localStart({ webpackConfig, paths, port, localhostName }: ParamT
       contentBase: path.resolve(paths.root, 'build/'),
       allowedHosts: [...localhostName],
       historyApiFallback: true,
+      https: true,
     }
 
     const devServer = new WebpackDevServer(compiler, devServerOption)

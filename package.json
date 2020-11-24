@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "author": "sanguk.park <moidpg@gmail.com>",
   "scripts": {
+    "install": "lerna link",
+    "bootstrap": "lerna bootstrap",
     "start:api": "yarn workspace @vr-monitoring/api start",
     "start:web": "yarn workspace @vr-monitoring/client start",
-    "build:web": "yarn workspace @vr-monitoring/client build"
+    "build:web": "yarn workspace @vr-monitoring/client build",
+    "build:docker": "deploy/script/dockerbuild.sh",
+    "start:docker": "yarn start:docker:web & yarn start:docker:api ",
+    "start:docker:web": "docker run -p 3000:3000 vr-monitor-client",
+    "start:docker:api": "docker run -p 5500:5500 vr-monitor-api"
+
   },
   "license": "MIT",
   "private": true,
@@ -18,7 +25,6 @@
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
-    "lerna": "^3.22.1",
     "node-sass": "^4.14.1",
     "postcss": "^8.1.7",
     "react": "^17.0.1",
@@ -27,6 +33,7 @@
     "typescript": "^4.0.5"
   },
   "devDependencies": {
+    "lerna": "^3.22.1",
     "@types/node": "^14.14.7",
     "cross-env": "^7.0.2",
     "prettier": "^2.1.2"
