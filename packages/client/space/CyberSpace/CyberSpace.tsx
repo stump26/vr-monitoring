@@ -5,7 +5,7 @@ import groundTexture from '../../assets/floor.png'
 
 const CyberSpace:React.FC = ({children})=>{
   return (
-    <Scene fog="type: linear; color: #222222; far: 20;">
+    <Scene fog="type: linear; color: #222222; far: 20;" joystick>
       <a-assets>
         <img id="groundTexture" src={groundTexture}/>
       </a-assets>

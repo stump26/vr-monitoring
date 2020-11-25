@@ -1,16 +1,38 @@
 import React,{ useEffect } from 'react'
 import {Entity} from 'aframe-react'
+import styled from 'styled-components'
 
 import {CyberSpace} from './space'
 import HomeBoard from './components/HomeBoard'
 import Button from './components/Button'
 import Modal from './components/Modal'
 import ChartRegister from './components/ChartRegister'
+import Joystick from './components/Joystick'
+import Camera from './components/Camera'
 
 import {usePagesMenagerCtx} from '@vr-monitoring/hooks/Contexts/usePagesMenagerCtx'
 import {useModalCtx} from '@vr-monitoring/hooks/Contexts/useModalCtx'
 
 import './App.scss'
+import { useCameraCtx } from '@vr-monitoring/hooks/Contexts/useCameraCtx'
+
+const Handle = styled.div`
+  position: fixed; 
+  display: block; 
+  width: 100px; 
+  height: 100px; 
+  right: 20px; 
+  bottom: 20px; 
+  background-color: rgba(200, 200, 200, 0.5); 
+  z-index: 20; 
+  touch-action: none;
+  &>p{
+    text-align: center;
+    margin-top:40px;
+    font-size:12px Roboto; 
+    opacity:.5;
+  }
+`
 
 const App: React.FC = () => {
   const {addPage,getPages} = usePagesMenagerCtx()
@@ -33,10 +55,10 @@ const App: React.FC = () => {
         {getPages().map(({Component,...props})=><Component id={props.id} key={props.id} {...props} />)}
 
         {/* camera config */}
-        <Entity primitive="a-camera" wasd-controls="acceleration:500;fly:true;" position="0 2 0" id="mouseCursor" cursor="rayOrigin: mouse" >
+        <Camera>
           {/* <Entity primitive="a-cursor"   raycaster="far: 100" /> */}
           {/* <Entity laser-controls raycaster="objects: .screen;" /> */}
-        </Entity>
+        </Camera>
       </CyberSpace>
       <Modal 
         visible={modalVisible}
@@ -44,6 +66,7 @@ const App: React.FC = () => {
       >
         <ChartRegister />
       </Modal>
+      <Joystick />
     </>
     
   )
