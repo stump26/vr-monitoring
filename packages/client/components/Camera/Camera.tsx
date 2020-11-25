@@ -6,7 +6,7 @@ import throttling from '@vr-monitoring/shared/util/throttling'
 import {hashgen} from '@vr-monitoring/shared/util/hashgen'
 
 const Camera:React.FC =({children})=>{
-  const {camPosition,camRotation,setPosition} = useCameraCtx()
+  const {camPosition,camRotation,setPosition,setRotation} = useCameraCtx()
 
   useEffect(()=>{
     AFRAME.registerComponent('cam-listener', {
@@ -25,8 +25,12 @@ const Camera:React.FC =({children})=>{
             this.oldPosition?.y !==this.monitorEl.object3D.position.y ||
             this.oldPosition?.z !==this.monitorEl.object3D.position.z
         ){
-          throttling(this.positionHash,()=>{
-              console.log("position changed",this.oldPosition,this.monitorEl.object3D.position)
+          throttling(this.positionHash,async ()=>{
+              setPosition({
+                x:this.monitorEl.object3D.position.x,
+                y:this.monitorEl.object3D.position.y,
+                z:this.monitorEl.object3D.position.z,
+              })
           },300)
           this.oldPosition={...this.monitorEl.object3D.position}
         }
@@ -36,8 +40,12 @@ const Camera:React.FC =({children})=>{
           this.oldRotation?._y !==this.monitorEl.object3D.rotation._y ||
           this.oldRotation?._z !==this.monitorEl.object3D.rotation._z
         ){
-          throttling(this.rotaionHash,()=>{
-            console.log("rotation changed",this.oldRotation,this.monitorEl.object3D.rotation)
+          throttling(this.rotaionHash,async ()=>{
+            setRotation({
+              x:this.monitorEl.object3D.rotation._x,
+              y:this.monitorEl.object3D.rotation._y,
+              z:this.monitorEl.object3D.rotation._z,
+            })
           },300)
           this.oldRotation={...this.monitorEl.object3D.rotation}
         }
@@ -53,9 +61,6 @@ const Camera:React.FC =({children})=>{
       cam-listener
       id="camera" 
       cursor="rayOrigin: mouse" 
-      events={{
-        componentchanged:()=>console.log('cam changed')
-      }}
     >
       {children}
     </Entity>
