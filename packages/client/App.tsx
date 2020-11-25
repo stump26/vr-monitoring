@@ -1,6 +1,7 @@
 import React,{ useEffect } from 'react'
 import {Entity} from 'aframe-react'
 import styled from 'styled-components'
+import {isMobile} from 'react-device-detect';
 
 import {CyberSpace} from './space'
 import HomeBoard from './components/HomeBoard'
@@ -14,7 +15,6 @@ import {usePagesMenagerCtx} from '@vr-monitoring/hooks/Contexts/usePagesMenagerC
 import {useModalCtx} from '@vr-monitoring/hooks/Contexts/useModalCtx'
 
 import './App.scss'
-import { useCameraCtx } from '@vr-monitoring/hooks/Contexts/useCameraCtx'
 
 const Handle = styled.div`
   position: fixed; 
@@ -66,7 +66,7 @@ const App: React.FC = () => {
       >
         <ChartRegister />
       </Modal>
-      <Joystick />
+      {!modalVisible&&isMobile&&<Joystick />}
     </>
     
   )

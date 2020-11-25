@@ -20,7 +20,7 @@ const ContentsContainer = styled.div`
   display: flex;
   flex-direction:column;
   width:400px;
-  height:400px;
+  max-height:400px;
   border:1px solid #5e5e5e;
   border-radius:10px;
   justify-content: center;
